@@ -19,7 +19,7 @@ interface JobDetailsFormProps {
     handleTab,
     handleJobDetailsSubmit,
   }) => {
-    const [serInputJob, setUserInputJob] = useState<IJobDetails>({
+    const [userInputJob, setUserInputJob] = useState<IJobDetails>({
       jobTitle: "",
       jobDetails: "",
       jobLocation: "",
@@ -34,6 +34,7 @@ interface JobDetailsFormProps {
      touched, 
      handleBlur,
       handleSubmit, 
+      isValid,
       values } =
     useFormik<IJobDetails>({
       initialValues: {
@@ -48,17 +49,22 @@ interface JobDetailsFormProps {
         jobPosition: Yup.string().required("Job position is required"),
       }),
       onSubmit: (values) => {
-        handleJobDetailsSubmit(values);
+        handleJobDetailsSubmit(values)
+        console.log(values)
         handleTab(2);
+        
       },
     });
     
-  const handleInputChange = (field: keyof IJobDetails, value: any) => {
+  const handleInputChangeJob= (field: keyof IJobDetails, value: any) => {
     setUserInputJob((prevInputs) => ({
       ...prevInputs,
       [field]: value,
-    }));
+    
+    }   ));
+    console.log(field ,value)
   };
+  
 
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
@@ -70,8 +76,9 @@ interface JobDetailsFormProps {
           
           onChange={(e) => {
             handleChange(e);
-            handleInputChange("jobTitle", e.target.value);
-            setFieldValue("jobTitle", e.target.value);
+            handleInputChangeJob("jobTitle", e.target.value);
+            // setFieldValue("jobTitle", e.target.value);
+            console.log(e.target.value)
           }}
           onBlur={handleBlur}
           value={values?.jobTitle}
@@ -84,8 +91,9 @@ interface JobDetailsFormProps {
           name="jobDetails"
           onChange={(e) => {
             handleChange(e);
-            handleInputChange("jobDetails", e.target.value);
-            setFieldValue("jobDetails", e.target.value);
+            handleInputChangeJob("jobDetails", e.target.value);
+            
+            
           }}
           onBlur={handleBlur}
           value={values?.jobDetails}
@@ -98,7 +106,7 @@ interface JobDetailsFormProps {
           placeholder="Enter job location"
           onChange={(e) => {
             handleChange(e);
-            handleInputChange("jobLocation", e.target.value);
+            handleInputChangeJob("jobLocation", e.target.value);
             setFieldValue("jobLocation", e.target.value);
           }}
           onBlur={handleBlur}
