@@ -1,4 +1,3 @@
-
 import { Button, Flex, Box } from "@chakra-ui/react";
 import React, { useState } from "react";
 import FormInput from "../../components/formComponents/FormInput";
@@ -8,8 +7,6 @@ import * as Yup from "yup";
 import { PageNumbers } from "../../interface/home";
 import { IRequisitionDetails } from "../../interface/forms";
 import { genderOptions, urgencyOptions } from "./constants";
-
-
 
 interface RequisitionDetailsFormProps {
   handleTab: (n: PageNumbers) => void;
@@ -26,13 +23,6 @@ const RequisitionDetailsForm: React.FC<RequisitionDetailsFormProps> = ({
     urgency: "",
     gender: "",
   });
-
-  // const handleInputChange = (field: keyof IRequisitionDetails, value: any) => {
-  //   setUserInput((prevInputs) => ({
-  //     ...prevInputs,
-  //     [field]: value,
-  //   }));
-  // };
 
   const {
     handleChange,
@@ -63,6 +53,7 @@ const RequisitionDetailsForm: React.FC<RequisitionDetailsFormProps> = ({
     }),
     onSubmit: (values) => {
       handleRequisitionSubmit(values);
+      console.log(values);
       handleTab(1);
     },
   });
@@ -73,9 +64,17 @@ const RequisitionDetailsForm: React.FC<RequisitionDetailsFormProps> = ({
       [field]: value,
     }));
   };
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleSubmit(e);
+  };
 
   return (
-    <Box width="100%" as="form" onSubmit={handleSubmit as any}>
+    <Box
+      width="100%"
+      as="form"
+      onSubmit={handleRequisitionSubmit(values) as any}
+    >
       <Box width="100%">
         <FormInput
           label="Requisition Title"
@@ -132,7 +131,11 @@ const RequisitionDetailsForm: React.FC<RequisitionDetailsFormProps> = ({
           value={values.urgency}
         />
         <Flex w="100%" justify="flex-end" mt="4rem">
-          <Button colorScheme="red" type="submit">
+          <Button
+            colorScheme="red"
+            type="submit"
+            onClick={handleFormSubmit as any}
+          >
             Next
           </Button>
         </Flex>

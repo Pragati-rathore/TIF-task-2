@@ -46,11 +46,10 @@ const KeyValue: React.FC<{
 };
 
 const PreviewCard: React.FC<{
-  // requisitionDetails: IRequisitionDetails;
-  userInput: IRequisitionDetails
+  userInput: IRequisitionDetails;
   userInputJob: IJobDetails;
-  interviewSettings?: IInterViewSettings;
-}> = ({ userInput , userInputJob, interviewSettings }) => {
+  userInterviewInput: IInterViewSettings;
+}> = ({ userInput, userInputJob, userInterviewInput }) => {
   return (
     <Box p="1rem">
       <Box borderRadius="10px" bgColor="gray.100" height="fit-content">
@@ -81,14 +80,14 @@ const PreviewCard: React.FC<{
               alignItems="center"
             >
               <Text fontSize="0.9rem" fontWeight="500">
-              {userInput.requisitionTitle}
+                {userInput.requisitionTitle}
               </Text>
               <Flex justifyContent="space-around" alignItems="center">
                 <Text fontSize="0.8rem" mr="0.4rem" fontWeight="200" as="p">
                   OPENINGS
                 </Text>
                 <Text fontSize="1rem" fontWeight="bold" as="span">
-                {userInput.noOfOpenings}
+                  {userInput.noOfOpenings}
                 </Text>
               </Flex>
             </Flex>
@@ -99,17 +98,15 @@ const PreviewCard: React.FC<{
             <KeyValue
               title="Urgency"
               value={
-                urgencyOptions.find(
-                  (item) => item?.value === userInput.urgency
-                )?.label
+                urgencyOptions.find((item) => item?.value === userInput.urgency)
+                  ?.label
               }
             />
             <KeyValue
               title="Gender"
               value={
-                genderOptions.find(
-                  (item) => item?.value === userInput.gender
-                )?.label
+                genderOptions.find((item) => item?.value === userInput.gender)
+                  ?.label
               }
             />
           </DataCard>
@@ -123,7 +120,8 @@ const PreviewCard: React.FC<{
               title="Interview Duration"
               value={
                 interviewDurationOptions.find(
-                  (item) => item?.value === interviewSettings?.interviewDuration
+                  (item) =>
+                    item?.value === userInterviewInput?.interviewDuration
                 )?.label
               }
             />
@@ -131,7 +129,8 @@ const PreviewCard: React.FC<{
               title="Interview Language"
               value={
                 interviewLanguageOptions.find(
-                  (item) => item?.value === interviewSettings?.interviewLanguage
+                  (item) =>
+                    item?.value === userInterviewInput?.interviewLanguage
                 )?.label
               }
             />
@@ -139,7 +138,7 @@ const PreviewCard: React.FC<{
               title="Interview Mode"
               value={
                 interviewModeOptions.find(
-                  (item) => item?.value === interviewSettings?.interviewMode
+                  (item) => item?.value === userInterviewInput?.interviewMode
                 )?.label
               }
             />
@@ -151,4 +150,3 @@ const PreviewCard: React.FC<{
 };
 
 export default PreviewCard;
-

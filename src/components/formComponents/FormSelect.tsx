@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "@chakra-ui/react";
+import { position, useTheme } from "@chakra-ui/react";
 import FromWrapper from "./FormWrapper";
 import { IFormInputProps } from "@src/interface/forms";
 import ReactSelect, { Props } from "react-select";
@@ -52,7 +52,7 @@ const FormSelect: React.FC<IFormSelectProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         options={options}
-        // styles
+       
         styles={{
           container: (base) => ({
             ...base,
@@ -61,11 +61,16 @@ const FormSelect: React.FC<IFormSelectProps> = ({
             height: "auto",
             maxHeight: "none",
             minHeight: "none",
+            
+           
+           
+           
           }),
           control: (base, { isFocused }) => ({
             ...base,
             width: "100%",
             minWidth: "272px",
+            
             height: "45px",
             border: isFocused
               ? `1px solid ${theme.colors.primary}`
@@ -83,11 +88,18 @@ const FormSelect: React.FC<IFormSelectProps> = ({
           valueContainer: (base) => ({
             ...base,
             paddingLeft: "20px",
+           
+           
+           
+            
           }),
           option: (base, { isFocused }) => ({
             ...base,
             fontSize: ".875rem",
             fontWeight: "500",
+            
+          
+            
           }),
         }}
         {...selectProps}
